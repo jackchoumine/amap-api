@@ -3,8 +3,15 @@ import { ref, watch } from "vue";
 import { useInitMap, useClickMap, useZoomMap } from "@/hooks";
 
 const mapContainer = ref(null);
-const { map } = useInitMap(mapContainer, {}, ['AMap.ToolBar', 'AMap.Scale', 'AMap.MapType', 'AMap.ControlBar'])
-const { position } = useClickMap(map)
+const { map, Map } = useInitMap(mapContainer, {}, ['AMap.ToolBar', 'AMap.Scale', 'AMap.MapType', 'AMap.ControlBar'])
+const { position } = useClickMap(map, (event) => {
+  const marker = new Map.value.Marker({
+    position: event.lnglat,
+    title: 'new marker'
+  })
+  // map.value.add(marker)
+  marker.setMap(map.value)
+})
 const { zoom } = useZoomMap(map)
 </script>
 
