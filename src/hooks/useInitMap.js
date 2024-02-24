@@ -25,7 +25,7 @@ export function useInitMap(mapContainer, options = {}, plugins = []) {
     window._AMapSecurityConfig = {
       securityJsCode: JS_CODE,
     }
-    console.log(plugins)
+    // console.log(plugins)
     AMapLoader.load({
       key: KEY, // 申请好的Web端开发者Key，首次调用 load 时必填
       version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
