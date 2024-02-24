@@ -33,6 +33,7 @@ header {
 }
 
 main {
+  position: relative;
   height: calc(100vh - 2rem);
 }
 </style>
