@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/MapLayer.vue'),
     },
     {
+      path: '/event',
+      name: 'event',
+      component: () => import('../views/MapEvent.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
