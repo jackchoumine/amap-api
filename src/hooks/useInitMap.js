@@ -4,8 +4,14 @@ import { onMounted, onUnmounted, shallowRef } from 'vue'
 const JS_CODE = '5bcd46cd13026f9f897f1bfa6a691e6c'
 const KEY = 'a50468e975c49b6d6d9ac14fef6e4723'
 
-export function useInitMap(mapContainer, options = {}, plugins = []) {
+export function useInitMap(
+  mapContainer,
+  options = {},
+  plugins = [],
+  finishInit = () => {}
+) {
   const map = shallowRef(null)
+  let Map = shallowRef(null)
 
   onMounted(() => {
     init(mapContainer, options, plugins)
@@ -13,9 +19,10 @@ export function useInitMap(mapContainer, options = {}, plugins = []) {
 
   onUnmounted(() => {
     map.value.destroy()
+    map.value = null
   })
 
-  return map
+  return { map, Map }
 
   function init(
     mapContainer,
@@ -32,6 +39,7 @@ export function useInitMap(mapContainer, options = {}, plugins = []) {
       plugins, // 需要使用的的插件列表，如比例尺'AMap.Scale'等
     })
       .then(AMap => {
+        Map.value = AMap
         const mapOptions = {
           viewMode, // 是否为3D地图模式
           zoom, // 初始化地图级别
@@ -39,6 +47,9 @@ export function useInitMap(mapContainer, options = {}, plugins = []) {
           ...rest,
         }
         map.value = new AMap.Map(mapContainer.value, mapOptions)
+        map.value.on('complete', () => {
+          finishInit(map.value, AMap)
+        })
         // 添加地图控件
         plugins.forEach(plugin => {
           AMap.plugin(plugin, () => {

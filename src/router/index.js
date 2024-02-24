@@ -10,6 +10,11 @@ const router = createRouter({
       component: InitMap,
     },
     {
+      path: '/layer',
+      name: 'layer',
+      component: () => import('../views/MapLayer.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

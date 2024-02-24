@@ -6,6 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <nav>
       <RouterLink to="/">初始化</RouterLink>
+      <RouterLink to="/layer">图层</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </nav>
   </header>
