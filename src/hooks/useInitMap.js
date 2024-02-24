@@ -39,9 +39,15 @@ export function useInitMap(mapContainer, options = {}, plugins = []) {
           ...rest,
         }
         map.value = new AMap.Map(mapContainer.value, mapOptions)
-        // plugins.forEach(plugin => {
-        //   map.value.addControl(new AMap[plugin]())
-        // })
+        // 添加地图控件
+        plugins.forEach(plugin => {
+          AMap.plugin(plugin, () => {
+            // console.log(plugin)
+            const p = plugin.split('AMap.')[1]
+            const _plugin = new AMap[p]()
+            map.value.addControl(_plugin)
+          })
+        })
       })
       .catch(e => {
         console.log(e)

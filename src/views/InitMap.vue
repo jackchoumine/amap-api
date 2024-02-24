@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useInitMap } from "@/hooks";
 
 const mapContainer = ref(null);
-useInitMap(mapContainer, {}, ['AMap.Scale'])
+useInitMap(mapContainer, {}, ['AMap.ToolBar', 'AMap.Scale'])
 </script>
 
 <template>
