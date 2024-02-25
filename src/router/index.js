@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('../views/MapEvent.vue'),
     },
     {
+      path: '/distance',
+      name: 'distance',
+      component: () => import('../views/DistanceMap.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
